@@ -1,9 +1,7 @@
-const loader = require('beanify-autoload')
+const loader = require('smallify-autoload')
 
 module.exports = async function (teamity, opts) {
-  const options = { ...opts, urlPrefix: '/', pathSplit: '/' }
-
-  teamity.register(loader, options)
+  teamity.register(loader, opts)
 }
 
 module.exports.route = function (route) {
