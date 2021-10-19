@@ -1,4 +1,4 @@
-const loader = require('smallify-autoload')
+const loader = require('beanify-autoload')
 
 module.exports = async function (teamity, opts) {
   teamity.register(loader, opts)

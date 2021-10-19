@@ -1,6 +1,6 @@
 {
   "name": "teamity-autoload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "typings": "index.d.ts",
   "repository": "https://github.com/teamity/teamity-autoload.git",
@@ -33,6 +33,6 @@
   },
   "pre-commit": ["lint"],
   "dependencies": {
-    "smallify-autoload": "^1.0.3"
+    "beanify-autoload": "^3.0.11"
   }
 }
