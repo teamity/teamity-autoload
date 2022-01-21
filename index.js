@@ -43,7 +43,12 @@ async function loadDirents (teamity, dir, depth, opts) {
     const childDir = path.join(dir, name)
 
     if (dirent.isDirectory() && !isMaxDepth) {
-      const childPrefix = depth === 0 ? `${prefix}${separator}${name}` : name
+      let childPrefix
+      if (depth === 0) {
+        childPrefix = prefix === '' ? `${name}` : `${prefix}${separator}${name}`
+      } else {
+        childPrefix = name
+      }
 
       if (dirAsScope === true) {
         teamity.register(

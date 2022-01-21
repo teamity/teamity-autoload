@@ -1,6 +1,6 @@
 {
   "name": "teamity-autoload",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "index.js",
   "typings": "index.d.ts",
   "repository": "https://github.com/teamity/teamity-autoload.git",
