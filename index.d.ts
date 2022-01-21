@@ -1,5 +1,3 @@
-import { Teamity } from 'teamity'
-
 import { AutoloadOptions, TeamityAutoload } from './types/options'
 
 declare const autoload: TeamityAutoload
@@ -7,7 +5,7 @@ declare const autoload: TeamityAutoload
 export = autoload
 
 declare module 'teamity' {
-  interface TeamityPlugin {
-    (plugin: TeamityAutoload, opts: AutoloadOptions): Teamity
+  interface Teamity {
+    register(autoload: TeamityAutoload, options: AutoloadOptions): Teamity
   }
 }
