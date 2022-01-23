@@ -37,7 +37,8 @@ teamity.register(async (ins, opts) => {
 
 teamity.register(autoload, {
   dir: path.join(__dirname, 'test'),
-  prefix: 'test'
+  prefix: 'test',
+  name: 'test'
 })
 
 teamity.addHook('onRoute', function (route) {

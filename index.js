@@ -14,15 +14,9 @@ async function loadDirents (teamity, dir, depth, opts) {
     indexPattern,
     ignorePattern,
     maxDepth,
-    dirAsScope,
-    prefix
+    dirAsScope
   } = opts
 
-  const {
-    $options: {
-      router: { separator }
-    }
-  } = teamity
   const dirents = await readdir(dir, { withFileTypes: true })
 
   const indexDirent = dirents.find(dirent => indexPattern.test(dirent.name))
@@ -43,13 +37,6 @@ async function loadDirents (teamity, dir, depth, opts) {
     const childDir = path.join(dir, name)
 
     if (dirent.isDirectory() && !isMaxDepth) {
-      let childPrefix
-      if (depth === 0) {
-        childPrefix = prefix === '' ? `${name}` : `${prefix}${separator}${name}`
-      } else {
-        childPrefix = name
-      }
-
       if (dirAsScope === true) {
         teamity.register(
           async ins => {
@@ -57,8 +44,8 @@ async function loadDirents (teamity, dir, depth, opts) {
             await loadDirents(ins, childDir, depth + 1, opts)
           },
           {
-            name: dirent.name,
-            prefix: childPrefix
+            name: name,
+            prefix: name
           }
         )
       } else {
@@ -73,12 +60,7 @@ async function loadDirents (teamity, dir, depth, opts) {
         fileModule.url = name.replace(path.extname(name), '')
         teamity.route(fileModule)
       } else {
-        const childOpts = {}
-        if (depth === 0) {
-          childOpts.name = name
-          childOpts.prefix = prefix
-        }
-        teamity.register(require(childDir), childOpts)
+        teamity.register(require(childDir))
       }
     }
   }
@@ -110,3 +92,5 @@ module.exports.route = function (route) {
   route.$autoload = true
   return route
 }
+
+// module.exports[]
